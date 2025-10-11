@@ -39,7 +39,7 @@ The dataset, `preprocessed_dataset.csv`, contains 7,043 customer records with th
   - `./Testing_Data/X_test.csv`  
   - `./Testing_Data/y_test.csv`
 
-### 4. Clustering Analysis (Optional)
+### 4. Clustering Analysis
 - Identify optimal number of clusters using the **elbow method**.  
 - Train a **K-Means clustering model** on the dataset.  
 - Visualize and label resulting clusters to gain actionable insights.
