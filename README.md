@@ -3,6 +3,40 @@
 ## Project Overview
 This project aims to analyze customer churn behavior and prepare the dataset for machine learning modeling. By exploring customer demographics, service usage, and contract types, the project provides insights into patterns that lead to churn and sets the foundation for predictive modeling.
 
+## Folder Structure
+
+```
+📁CHURN-PREDICTION
+└── 📁Clustering_Analysis
+|   └── 📁Clustering Analysis Documentation
+|   |   ├── Clustering_Analysis.docx
+|   |   ├── Clustering_Analysis.pdf
+|   └── 📁data
+|   |   ├── X_train.csv
+|   └── 📁results
+|   |   ├── cluster_center.xlsx
+|   |   ├── cluster_label.xlsx
+|   |   ├── Cluster_scatter_plot.png
+|   |   ├── Clustering_results.xlsx
+|   |   ├── Elbow.png
+|   ├── clustering_analysis.ipynb
+└── 📁Data_Preparation
+|   └── 📁Preprocessed_Data
+|   |   ├── preprocessed_data_with_encoding_categorical.csv
+|   |   ├── preprocessed_dataset.csv
+|   └── 📁Scaling Techniques Documentation
+|   |   ├── Data_Preparation.docx
+|   |   ├── Data_Preparation.pdf
+|   └── 📁Testing_Data
+|   |   ├── X_test.csv
+|   |   ├── y_test.csv
+|   └── 📁Training_Data
+|   |   ├── X_train.csv
+|   |   ├── y_train.csv
+|   ├── data_preparation.ipynb
+└── README.md
+```
+
 ## Dataset
 The dataset, `preprocessed_dataset.csv`, contains 7,043 customer records with the following 10 features:
 
@@ -54,7 +88,6 @@ The project ensures that the dataset is clean, processed, and ready for machine 
   - **Matplotlib & SciPy**: Visualize clusters and draw boundaries.
   - **matplotlib.cm**: Assign distinct colors to clusters for interpretation.
 
----
 
 ### 2. Data Loading
 - Dataset is read from `X_train.csv` using `pd.read_csv()`.  
@@ -68,8 +101,6 @@ The project ensures that the dataset is clean, processed, and ready for machine 
 - Standardizes data (mean = 0, std = 1) to improve model performance.  
 - PCA reduces data to **2 principal components** for easier visualization (`X_pca`).  
 
----
-
 ### 5. Elbow Method
 - Determines the **optimal number of clusters (k)** for K-Means.  
 - Steps:
@@ -78,14 +109,12 @@ The project ensures that the dataset is clean, processed, and ready for machine 
 - **Result**: Optimal k = 4.  
 - Plot saved as `Elbow.png`.  
 
----
 
 ### 6. Optimal Number of Clusters
 - Uses Elbow Method to find point where additional clusters no longer improve model performance.  
 - K = 4 chosen for best balance between simplicity and accuracy.  
 - Visualization shows inertia reduction from K=1 to K=4, flattening afterward.  
 
----
 
 ### 7. Clustering Analysis
 - **Number of clusters**: K = 4.  
@@ -97,8 +126,6 @@ The project ensures that the dataset is clean, processed, and ready for machine 
   - Save plot as `Cluster_scatter_plot.png`.  
 - Visual output shows four distinct customer segments.
 
----
-
 ### 8. Save Data
 - Reconstruct cluster centers to original feature space using `inverse_transform()`.  
 - Rescale centers with original data mean and std.  
@@ -108,7 +135,6 @@ The project ensures that the dataset is clean, processed, and ready for machine 
   - **Cluster Summary Report**: `Clustering_results.xlsx`  
     - Includes cluster name, frequency, and percentage of total customers.
 
----
 
 ## Results
 - **Optimal Clusters**: 4  
@@ -119,7 +145,6 @@ The project ensures that the dataset is clean, processed, and ready for machine 
   - `cluster_label.xlsx` → Customer cluster assignments  
   - `Clustering_results.xlsx` → Summary report  
 
----
 
 ## Conclusion
 This clustering analysis provides a **clear segmentation of customers**, which can be used to:
@@ -127,6 +152,7 @@ This clustering analysis provides a **clear segmentation of customers**, which c
 - Develop targeted marketing strategies  
 - Support predictive modeling for customer retention  
 
+---
 
 ## Libraries Used
 - Python 3.x  
@@ -136,47 +162,15 @@ This clustering analysis provides a **clear segmentation of customers**, which c
 - Matplotlib  
 - OS, Sys  
 
-## Folder Structure
 
-```
-📁CHURN-PREDICTION
-└── 📁Clustering_Analysis
-|   └── 📁Clustering Analysis Documentation
-|   |   ├── Clustering_Analysis.docx
-|   |   ├── Clustering_Analysis.pdf
-|   └── 📁data
-|   |   ├── X_train.csv
-|   └── 📁results
-|   |   ├── cluster_center.xlsx
-|   |   ├── cluster_label.xlsx
-|   |   ├── Cluster_scatter_plot.png
-|   |   ├── Clustering_results.xlsx
-|   |   ├── Elbow.png
-|   ├── clustering_analysis.ipynb
-└── 📁Data_Preparation
-|   └── 📁Preprocessed_Data
-|   |   ├── preprocessed_data_with_encoding_categorical.csv
-|   |   ├── preprocessed_dataset.csv
-|   └── 📁Scaling Techniques Documentation
-|   |   ├── Data_Preparation.docx
-|   |   ├── Data_Preparation.pdf
-|   └── 📁Testing_Data
-|   |   ├── X_test.csv
-|   |   ├── y_test.csv
-|   └── 📁Training_Data
-|   |   ├── X_train.csv
-|   |   ├── y_train.csv
-|   ├── data_preparation.ipynb
-└── README.md
-```
 ## Authors
 Sishir Pandey - Project Manager
 
 Fahim Arman - Data Engineer
 
-Jitesh Akaveeti - Data Analyst ( Predictive Modelling)
-
 Chen - Data Analyst (Clustering)
+
+Jitesh Akaveeti - Data Analyst ( Predictive Modelling)
 
 Preeti Khatri - Data Analyst (Predictive Modelling)
 
