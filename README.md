@@ -1,4 +1,4 @@
-# Customer Churn Analysis for Telecommunications Company
+# Customer Churn Analysis and Prediction
 
 ## Project Overview
 
@@ -199,8 +199,8 @@ pip install -r requirements.txt
 
 ## Project Team:
 
-- Sishir Pandey - Project Manager
-- Fahim Arman - Data Engineer
+- Sishir Pandey - Project Manager - [LinkedIn](https://www.linkedin.com/in/connectsishir/)
+- Fahim Arman - Data Engineer - [LinkedIn](https://www.linkedin.com/in/fahim37/)
 - Chen - Data Analyst (Clustering)
 - Jitesh Akaveeti - Data Analyst (Predictive Modelling)
 - Preeti Khatri - Data Analyst (Predictive Modelling)
