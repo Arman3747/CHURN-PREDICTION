@@ -1,179 +1,211 @@
-# Customer Churn Analysis and Prediction
+# Customer Churn Analysis for Telecommunications Company
 
 ## Project Overview
-This project aims to analyze customer churn behavior and prepare the dataset for machine learning modeling. By exploring customer demographics, service usage, and contract types, the project provides insights into patterns that lead to churn and sets the foundation for predictive modeling.
 
-## Folder Structure
+This project aims to predict customer churn and segment customers for a telecommunications company. By analyzing customer data, performing clustering, and applying predictive modeling techniques, the team identified high-risk customer groups, key churn drivers, and actionable retention strategies. The project combines unsupervised learning (K-Means clustering) with supervised learning (Artificial Neural Networks) to provide both descriptive and predictive insights.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Data Description](#data-description)
+- [Methodology](#methodology)
+  - [Data Preprocessing](#data-preprocessing)
+  - [Clustering Analysis](#clustering-analysis)
+  - [Predictive Modeling](#predictive-modeling)
+- [Key Findings](#key-findings)
+- [Retention Strategies](#retention-strategies)
+- [Limitations & Future Improvements](#limitations--future-improvements)
+- [Conclusion](#conclusion)
+- [Directory Structure](#directory-structure)
+- [Libraries Used](#libraries-used)
+- [Reproducibility](#reproducibility)
+
+## Data Description
+
+The dataset consists of **7,043 customer records** with the following features:
+
+- **Demographic**: `Gender`, `SeniorCitizen`, `Dependents`
+- **Account Info**: `Tenure`, `Contract`, `MonthlyCharges`
+- **Services**: `PhoneService`, `MultipleLines`, `InternetService`
+- **Target Variable**: `Churn` (`Yes`/`No`)
+
+The dataset is complete with no missing values, and the target variable is imbalanced: 1,869 churned vs 5,174 non-churned customers.
+
+<!-- <details>
+<summary>Data Description</summary>
+
+The dataset consists of **7,043 customer records** with the following features:
+
+- **Demographic**: `Gender`, `SeniorCitizen`, `Dependents`
+- **Account Info**: `Tenure`, `Contract`, `MonthlyCharges`
+- **Services**: `PhoneService`, `MultipleLines`, `InternetService`
+- **Target Variable**: `Churn` (`Yes`/`No`)
+
+The dataset is complete with no missing values, and the target variable is imbalanced: 1,869 churned vs 5,174 non-churned customers.
+
+</details> -->
+
+## Methodology
+
+### Data Preprocessing
+
+- Loaded data using Pandas and inspected the structure (`head()`, `info()`, `shape`).
+- Converted categorical columns to numeric using **Label Encoding**.
+- Scaled numerical features with **StandardScaler** for uniformity.
+- Split the dataset into training (80%) and testing (20%) sets with stratification to maintain class distribution.
+- Applied **one-hot encoding** to categorical features for machine learning compatibility.
+
+### Clustering Analysis
+
+- **Normalization**: Standardized features to mean 0, standard deviation 1.
+- **Dimensionality Reduction**: Applied PCA to reduce to 2 components for visualization.
+- **K-Means Clustering**:
+  - Optimal clusters determined using the **Elbow Method** → `K = 4`.
+  - Visualized clusters with convex hulls and plotted centroids.
+  - Saved cluster labels and centers for further analysis.
+
+### Predictive Modeling (ANN)
+
+- Built an **Artificial Neural Network (ANN)** using Keras:
+  - Input layer = number of features
+  - Hidden layers = 64 and 32 neurons with ReLU and Dropout (0.3)
+  - Output layer = 1 neuron with Sigmoid activation for binary classification
+- Trained for 50 epochs, batch size 32, with 20% validation split.
+- Evaluated performance using:
+  - **Accuracy**: ~78%
+  - **ROC AUC**: 0.66
+  - **Confusion Matrix**: better performance for non-churners than churners
+- Saved trained model as `ANN_Churn_Model.h5` for future predictions.
+
+## Key Findings
+
+- **Customer Segmentation**: K-Means clustering revealed 3 meaningful groups:
+
+  1. Loyal and stable customers
+  2. Value-sensitive customers
+  3. High-risk new customers
+
+- **Churn Drivers Identified**:
+
+  - Contract type (month-to-month has higher churn)
+  - Customer tenure (newer customers are at higher risk)
+  - Monthly charges (higher charges increase churn probability)
+  - Usage of support services and add-ons
+
+- **ANN Insights**: Confirmed churn patterns based on service engagement, billing levels, and contract duration.
+
+## Retention Strategies
+
+### Segment-Specific
+
+- **Loyal & Stable Customers**: Loyalty rewards, maintain service quality, request feedback.
+- **Value-Sensitive Customers**: Targeted discounts, mid-tier bundle offers.
+- **High-Risk New Customers**: Early engagement campaigns, short-term incentives, encourage long-term contracts.
+
+### Model-Driven
+
+- Flag high-risk customers using churn probabilities.
+- Tailor retention offers based on key drivers (e.g., billing, service usage).
+- Integrate predictions into CRM for proactive interventions.
+- Automate retention workflows and monitor metrics continuously.
+
+## Limitations & Future Improvements
+
+- **Class Imbalance**: Fewer churned customers → risk of biased predictions.
+- **Lack of Qualitative Data**: Missing customer satisfaction, complaints, or support interactions.
+- **Model Interpretability**: Complex ANN models may be harder for stakeholders to understand.
+- **Static Data**: Dataset is a snapshot; evolving behaviors may affect model accuracy.
+
+**Proposed Solutions**:
+
+- Use SMOTE or class weighting to handle imbalance.
+- Apply SHAP or feature importance for interpretability.
+- Continuously update and retrain models as new data arrives.
+- Monitor performance over time and optimize hyperparameters.
+
+## Conclusion
+
+This project successfully identified high-risk customers and provided actionable insights into customer churn. Combining clustering with supervised learning allows the company to move from reactive retention to proactive strategies. The findings support informed decision-making, customer loyalty enhancement, and long-term value maximization.
+
+## Directory Structure
 
 ```
-📁CHURN-PREDICTION
-└── 📁Clustering_Analysis
-|   └── 📁Clustering Analysis Documentation
+📁Clustering_Analysis
+├── 📁Clustering Analysis Documentation
 |   |   ├── Clustering_Analysis.docx
 |   |   ├── Clustering_Analysis.pdf
-|   └── 📁data
+|   ├──📁data
 |   |   ├── X_train.csv
-|   └── 📁results
+|   ├── 📁results
 |   |   ├── cluster_center.xlsx
 |   |   ├── cluster_label.xlsx
 |   |   ├── Cluster_scatter_plot.png
 |   |   ├── Clustering_results.xlsx
 |   |   ├── Elbow.png
 |   ├── clustering_analysis.ipynb
-└── 📁Data_Preparation
-|   └── 📁Preprocessed_Data
+├── 📁Data_Preparation
+|   ├── 📁Preprocessed_Data
 |   |   ├── preprocessed_data_with_encoding_categorical.csv
 |   |   ├── preprocessed_dataset.csv
-|   └── 📁Scaling Techniques Documentation
+|   ├── 📁Scaling Techniques Documentation
 |   |   ├── Data_Preparation.docx
 |   |   ├── Data_Preparation.pdf
-|   └── 📁Testing_Data
+|   ├── 📁Testing_Data
 |   |   ├── X_test.csv
 |   |   ├── y_test.csv
-|   └── 📁Training_Data
+|   ├── 📁Training_Data
 |   |   ├── X_train.csv
 |   |   ├── y_train.csv
 |   ├── data_preparation.ipynb
+├── 📁Final_Report
+|   ├── Final_Report.docx
+|   ├── Final_Report.pdf
+├── 📁Predictive_Modeling
+|   ├── 📁Predictive Modeling Documentation
+|   |   ├── Predictive_Modeling.docx
+|   |   ├── Predictive_Modeling.pdf
+|   ├── 📁results
+|   |   ├── ANN_Churn_Model.h5
+|   |   ├── Confusion_Matrix.png
+|   |   ├── ROC.png
+|   ├── Predictive_Analysis.ipynb
 └── README.md
 ```
 
-## Dataset
-The dataset, `preprocessed_dataset.csv`, contains 7,043 customer records with the following 10 features:
+## Libraries Used
 
-- **gender**: Customer gender (Male/Female)  
-- **SeniorCitizen**: Indicates if the customer is a senior citizen (0 = No, 1 = Yes)  
-- **Dependents**: Whether the customer has dependents (Yes/No)  
-- **tenure**: Number of months the customer has stayed with the company  
-- **PhoneService**: Whether the customer has phone service (Yes/No)  
-- **MultipleLines**: Whether the customer has multiple phone lines (Yes/No)  
-- **InternetService**: Type of internet service (DSL/Fiber optic)  
-- **Contract**: Contract type (Month-to-month/One year/Two year)  
-- **MonthlyCharges**: Customer's monthly charges  
-- **Churn**: Whether the customer churned (Yes/No)  
+- Python 3.x
+- Pandas
+- NumPy
+- Scipy (`ConvexHull`)
+- Scikit-learn (`LabelEncoder`, `StandardScaler`, `train_test_split`, `KMeans`, `PCA`, `classification_report`, `confusion_matrix`, `accuracy_score`, `roc_auc_score`, `roc_curve`)
+- tensorflow (`Sequential`, `Dense`, `Dropout`)
+- Matplotlib
+- seaborn
+- OS, Sys
 
-## Scaling Techniques Documentation
+## Reproducibility
 
-The project ensures that the dataset is clean, processed, and ready for machine learning. It provides insights into customer behavior and creates a framework for predicting churn effectively, helping businesses make informed retention strategies.
+Follow the steps below to set up the project locally:
 
-### 1. Data Loading and Inspection
-- Load dataset using `pandas.read_csv()`.  
-- Preview first few rows with `churn.head()` and check dataset shape, column names, and info.  
-- Perform initial exploratory analysis using `value_counts()` to understand distributions of categorical variables.  
-- Check for missing values to ensure data completeness.
+```bash
+# 1. Clone the repository
+git clone https://github.com/Arman3747/CHURN-PREDICTION.git
+cd CHURN-PREDICTION
 
-### 2. Data Preprocessing
-- Convert categorical columns into numeric formats as needed (e.g., `Churn` → `Churn_binary`).  
-- Handle missing values: numeric columns filled with median values, categorical columns filled with `"Missing"`.  
-- Perform **one-hot encoding** for categorical features excluding the target variable.  
-- Separate features (`X`) and target (`y`) for modeling.  
-- Split data into training and testing sets using `train_test_split`.
+# 2. Install dependencies
+pip install -r requirements.txt
+```
 
-### 3. Data Storage
-- Save training and testing sets as CSV files for future use:
-  - `./Preprocessed_Data/preprocessed_data_with_encoding_categorical.csv`  
-  - `./Training_Data/X_train.csv`  
-  - `./Training_Data/y_train.csv`  
-  - `./Testing_Data/X_test.csv`  
-  - `./Testing_Data/y_test.csv`
+## Project Team:
 
-
-## Clustering Analysis Documentation
-
-### 1. Import Section
-- Imports essential Python libraries for data preprocessing, clustering, and visualization:
-  - **Pandas**: Load and manage datasets.
-  - **NumPy**: Numerical computations and array operations.
-  - **Scikit-learn (KMeans)**: Perform customer segmentation.
-  - **PCA**: Dimensionality reduction for visualization.
-  - **Matplotlib & SciPy**: Visualize clusters and draw boundaries.
-  - **matplotlib.cm**: Assign distinct colors to clusters for interpretation.
-
-
-### 2. Data Loading
-- Dataset is read from `X_train.csv` using `pd.read_csv()`.  
-- Stored in a Pandas DataFrame (`data`) for easy manipulation.  
-
-### 3. Data View
-- `data.head()` displays the first 5 rows to inspect structure, column names, and sample values.  
-
-### 4. Data Normalization
-- Converts DataFrame to NumPy array for faster computation.  
-- Standardizes data (mean = 0, std = 1) to improve model performance.  
-- PCA reduces data to **2 principal components** for easier visualization (`X_pca`).  
-
-### 5. Elbow Method
-- Determines the **optimal number of clusters (k)** for K-Means.  
-- Steps:
-  - Test k from 1 to 15, compute inertia (within-cluster sum of squares).  
-  - Plot k vs inertia to identify the “elbow point.”  
-- **Result**: Optimal k = 4.  
-- Plot saved as `Elbow.png`.  
-
-
-### 6. Optimal Number of Clusters
-- Uses Elbow Method to find point where additional clusters no longer improve model performance.  
-- K = 4 chosen for best balance between simplicity and accuracy.  
-- Visualization shows inertia reduction from K=1 to K=4, flattening afterward.  
-
-
-### 7. Clustering Analysis
-- **Number of clusters**: K = 4.  
-- **Steps:**
-  - Initialize and fit KMeans on PCA-transformed data.  
-  - Store cluster labels and centroids.  
-  - Visualize clusters with distinct colors, Convex Hull boundaries, and centroids.  
-  - Add legends, axis labels, and a title.  
-  - Save plot as `Cluster_scatter_plot.png`.  
-- Visual output shows four distinct customer segments.
-
-### 8. Save Data
-- Reconstruct cluster centers to original feature space using `inverse_transform()`.  
-- Rescale centers with original data mean and std.  
-- Save outputs:
-  - **Cluster Centers**: `cluster_center.xlsx`  
-  - **Cluster Labels**: `cluster_label.xlsx`  
-  - **Cluster Summary Report**: `Clustering_results.xlsx`  
-    - Includes cluster name, frequency, and percentage of total customers.
-
-
-## Results
-- **Optimal Clusters**: 4  
-- **Outputs Generated**:
-  - `Elbow.png` → Elbow Method plot  
-  - `Cluster_scatter_plot.png` → Cluster visualization  
-  - `cluster_center.xlsx` → Cluster centroids  
-  - `cluster_label.xlsx` → Customer cluster assignments  
-  - `Clustering_results.xlsx` → Summary report  
-
-
-## Conclusion
-This clustering analysis provides a **clear segmentation of customers**, which can be used to:
-- Identify high-risk churn groups  
-- Develop targeted marketing strategies  
-- Support predictive modeling for customer retention  
+- Sishir Pandey - Project Manager
+- Fahim Arman - Data Engineer
+- Chen - Data Analyst (Clustering)
+- Jitesh Akaveeti - Data Analyst (Predictive Modelling)
+- Preeti Khatri - Data Analyst (Predictive Modelling)
+- Bishesh Aryal - Business Analyst
 
 ---
 
-## Libraries Used
-- Python 3.x  
-- Pandas  
-- NumPy  
-- Scikit-learn (`train_test_split`, `KMeans`, `PCA`)  
-- Matplotlib  
-- OS, Sys  
-
-
-## Authors
-Sishir Pandey - Project Manager
-
-Fahim Arman - Data Engineer
-
-Chen - Data Analyst (Clustering)
-
-Jitesh Akaveeti - Data Analyst ( Predictive Modelling)
-
-Preeti Khatri - Data Analyst (Predictive Modelling)
-
-Bishesh Aryal - Business Analyst
-
-
+Thanks For Reading !!!
